@@ -11,7 +11,7 @@
    "ssh_private_ip": "true",
    "ssh_username": "ec2-user",
    "ssh_timeout": "7m",
-   "ami_name": "packer-app",
+   "ami_name": "packer-app"
 }],
 "provisioners": [
         {
