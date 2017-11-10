@@ -1,0 +1,46 @@
+{
+    "builders": [{
+        "name": "packer-pro-app-{{timestamp}}",
+        "type": "amazon-ebs",
+        "region": "eu-west-1",
+        "instance_type": "t2.micro",
+        "ssh_pty": "true",
+        "ssh_username": "ec2-user",
+        "ami_name": "pro-app-{{timestamp}}",
+        "ami_description": "Customized Amazon Linux",
+        "associate_public_ip_address": "true",
+        "iam_instance_profile": "r_packer",
+        "tags": {
+          "environment": "pro",
+          "role": "app"
+        },
+        "run_tags": {
+          "Name": "packer-pro-app-{{timestamp}}",
+          "environment": "pro",
+          "role": "app"
+        },
+        "source_ami_filter": {
+            "filters": {
+                "virtualization-type": "hvm",
+                "name": "amzn-ami-hvm*-ebs",
+                "root-device-type": "ebs"
+            },
+            "owners": ["137112412989"],
+            "most_recent": true
+        }
+    }],
+
+    "provisioners": [
+        {
+            "type": "shell",
+            "inline": [
+                "sudo yum update -y",
+				        "sudo /usr/sbin/update-motd --disable",
+                "echo 'No unauthorized access permitted' | sudo tee /etc/motd",
+                "sudo rm /etc/issue",
+                "sudo ln -s /etc/motd /etc/issue",
+                "sudo yum install -y elinks screen"
+            ]
+        }
+    ]
+}
