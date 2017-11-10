@@ -3,7 +3,7 @@
         "aws_ami_name": "amazon-linux_{{isotime \"02Jan2006\"}}",
         "environment": "{{ env `environment`}}",
         "role": "{{ env `role`}}",
-        "region": "{{ env `region`}}",
+        "region": "{{ env `region`}}"
     },
 
     "builders": [{
