@@ -1,0 +1,6 @@
+{
+  "environment": "pro",
+  "role": "app",
+  "region": "us-east-1",
+  "user_data_file": "cloud-init.yaml"
+}

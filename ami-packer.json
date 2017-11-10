@@ -1,24 +1,40 @@
 {
     "variables": {
-        "aws_region": "{{env `AWS_REGION`}}",
-        "aws_ami_name": "amazon-linux_{{isotime \"02Jan2006\"}}"
+        "aws_ami_name": "amazon-linux_{{isotime \"02Jan2006\"}}",
+        "environment": "{{ env `ENVIRONMENT`}}",
+        "role": "{{ env `ROLE`}}",
+        "region": "{{ env `region`}}",
+        "user_data_file": "{{ env `USER_DATA_FILE`}}"
     },
 
     "builders": [{
+        "name": "packer-{{ user `environment` }}-{{ user `role` }}-{{timestamp}}",
         "type": "amazon-ebs",
-        "region": "{{user `aws_region`}}",
+        "region": "{{user `region`}}",
         "instance_type": "t2.micro",
+        "ssh_pty": "true",
         "ssh_username": "ec2-user",
         "ami_name": "{{user `aws_ami_name`}}",
         "ami_description": "Customized Amazon Linux",
         "associate_public_ip_address": "true",
+        "iam_instance_profile": "packer",
+        "user_data_file": "{{ user `user_data_file` }}",
+        "tags": {
+          "environment": "{{ user `environment` }}",
+          "role": "{{ user `role` }}"
+        },
+        "run_tags": {
+          "Name": "packer-{{ user `environment` }}-{{ user `role` }}-{{timestamp}}",
+          "environment": "{{ user `environment` }}",
+          "role": "{{ user `role` }}"
+        },
         "source_ami_filter": {
             "filters": {
                 "virtualization-type": "hvm",
                 "name": "amzn-ami-hvm*-ebs",
                 "root-device-type": "ebs"
             },
-            "owners": ["137112412989", "591542846629", "801119661308", "102837901569", "013907871322", "206029621532", "286198878708", "443319210888"],
+            "owners": ["137112412989"],
             "most_recent": true
         }
     }],
@@ -28,7 +44,7 @@
             "type": "shell",
             "inline": [
                 "sudo yum update -y",
-				"sudo /usr/sbin/update-motd --disable",
+				        "sudo /usr/sbin/update-motd --disable",
                 "echo 'No unauthorized access permitted' | sudo tee /etc/motd",
                 "sudo rm /etc/issue",
                 "sudo ln -s /etc/motd /etc/issue",
