@@ -16,7 +16,7 @@
         "ami_name": "{{user `aws_ami_name`}}",
         "ami_description": "Customized Amazon Linux",
         "associate_public_ip_address": "true",
-        "iam_instance_profile": "ec2",
+        "iam_instance_profile": "packer",
         "tags": {
           "environment": "{{ user `environment` }}",
           "role": "{{ user `role` }}"
