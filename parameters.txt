@@ -1,0 +1,3 @@
+environment = pro
+role = app
+region = eu-west-1
