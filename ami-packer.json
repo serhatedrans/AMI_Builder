@@ -11,6 +11,7 @@
         "type": "amazon-ebs",
         "region": "{{user `region`}}",
         "instance_type": "t2.micro",
+        "user_data_file": "cloud-init.yaml",
         "ssh_pty": "true",
         "ssh_username": "centos",
         "ami_name": "{{ user `environment` }}-{{ user `role` }}-{{timestamp}}",
