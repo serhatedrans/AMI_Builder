@@ -39,6 +39,12 @@
 
     "provisioners": [
       {
+          "type": "shell",
+          "inline": [
+              "sudo yum install ansible -y",
+          ]
+      },
+      {
         "type": "ansible-local",
         "playbook_file": "httpd.yml"
       }
