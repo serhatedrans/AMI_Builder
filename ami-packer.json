@@ -12,7 +12,7 @@
         "region": "{{user `region`}}",
         "instance_type": "t2.micro",
         "ssh_pty": "true",
-        "ssh_username": "ec2-user",
+        "ssh_username": "centos",
         "ami_name": "{{ user `environment` }}-{{ user `role` }}-{{timestamp}}",
         "ami_description": "Customized Amazon Linux",
         "associate_public_ip_address": "true",
