@@ -1,5 +1,6 @@
 ---
 - name: This sets up an httpd webserver
+  hosts: localhost
   tasks:
   - name: Install the httpd rpm
     yum: name=httpd
