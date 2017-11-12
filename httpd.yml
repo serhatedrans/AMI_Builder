@@ -4,3 +4,4 @@
   tasks:
   - name: Install the httpd rpm
     yum: name=httpd
+  become: true
