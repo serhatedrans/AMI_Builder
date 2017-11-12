@@ -41,7 +41,7 @@
       {
           "type": "shell",
           "inline": [
-              "sudo yum install ansible -y",
+              "sudo yum install ansible -y"
           ]
       },
       {
